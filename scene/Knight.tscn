@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scene/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/knight.png" type="Texture" id=2]
+[ext_resource path="res://scene/Sword.tscn" type="PackedScene" id=4]
+[ext_resource path="res://script/PlayerController.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.24055, 3.65973 )
+
+[sub_resource type="Animation" id=2]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 6, 5, 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Hand/Sword:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 135.0, 0.0 ]
+}
+
+[node name="Knight" instance=ExtResource( 1 )]
+ctrl_path = NodePath("PlayerController")
+
+[node name="Body" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Sword" parent="Body/Hand" index="0" instance=ExtResource( 4 )]
+
+[node name="Sprite" parent="Body" index="1"]
+texture = ExtResource( 2 )
+offset = Vector2( 0, -10 )
+hframes = 9
+frame = 4
+
+[node name="MovePlayer" type="AnimationPlayer" parent="." index="2"]
+anims/Idle = SubResource( 2 )
+anims/Run = SubResource( 3 )
+
+[node name="AttackPlayer" type="AnimationPlayer" parent="." index="3"]
+anims/Attack = SubResource( 4 )
+
+[node name="PlayerController" type="Node2D" parent="." index="4"]
+script = ExtResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="5"]
+current = true
+[connection signal="attack" from="." to="AttackPlayer" method="play" binds= [ "Attack" ]]
+[connection signal="idle" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Idle" ]]
+[connection signal="running" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Run" ]]

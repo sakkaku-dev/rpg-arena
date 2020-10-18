@@ -2,7 +2,8 @@ extends State
 
 class_name Move
 
-signal play_animation(name)
+signal running
+signal idle
 
 export var speed = 200
 export var acceleration = 400
@@ -11,14 +12,11 @@ export var friction = 800
 export var character_path: NodePath
 onready var character: Character = get_node(character_path)
 
-export var attack_state_path: NodePath
-onready var attack_state := get_node(attack_state_path)
-
 var velocity = Vector2.ZERO
 
 func enter(msg = {}):
 	velocity = Vector2.ZERO
-	emit_signal("play_animation", "Idle")
+	emit_signal("idle")
 
 func physics_process(delta: float):
 	var dir = character.ctrl.get_move_direction()
@@ -28,8 +26,8 @@ func physics_process(delta: float):
 	character.move(velocity)
 		
 	if velocity.length() > 0.01:
-		emit_signal("play_animation", "Run")
+		emit_signal("running")
 	else:
-		emit_signal("play_animation", "Idle")
+		emit_signal("idle")
 
 	velocity = character.move_and_slide(velocity)

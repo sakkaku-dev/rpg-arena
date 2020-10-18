@@ -1,8 +1,8 @@
-extends Node
+extends CharacterController
 
 class_name PlayerController
 
-func attack() -> bool:
+func is_attacking() -> bool:
 	return Input.is_action_just_pressed("attack")
 
 func get_move_direction() -> Vector2:

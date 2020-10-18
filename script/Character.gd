@@ -2,14 +2,10 @@ extends KinematicBody2D
 
 class_name Character
 
-export var move_anim_path: NodePath
-onready var move_anim: AnimationPlayer = get_node(move_anim_path)
-
-export var attack_anim_path: NodePath
-onready var attack_anim: AnimationPlayer = get_node(attack_anim_path)
+signal attack
 
 export var ctrl_path: NodePath
-onready var ctrl: PlayerController = get_node(ctrl_path)
+onready var ctrl: CharacterController = get_node(ctrl_path)
 
 onready var body := $Body
 onready var hand := $Body/Hand
@@ -29,9 +25,6 @@ func move(velocity: Vector2) -> void:
 	var angle = curr_vec.angle_to(look_dir)
 	hand.rotation += angle
 
-func attack() -> void:
-	attack_anim.play("Attack")
-
 func _physics_process(delta):
-	if ctrl.attack():
-		attack()
+	if ctrl.is_attacking():
+		emit_signal("attack")

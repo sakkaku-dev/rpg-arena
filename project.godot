@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/Character.gd"
 }, {
+"base": "Node2D",
+"class": "CharacterController",
+"language": "GDScript",
+"path": "res://script/CharacterController.gd"
+}, {
 "base": "Reference",
 "class": "Mockito",
 "language": "GDScript",
@@ -24,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/Move.gd"
 }, {
-"base": "Node",
+"base": "CharacterController",
 "class": "PlayerController",
 "language": "GDScript",
 "path": "res://script/PlayerController.gd"
@@ -48,16 +53,23 @@ _global_script_classes=[ {
 "class": "WATTest",
 "language": "GDScript",
 "path": "res://addons/WAT/core/test/test.gd"
+}, {
+"base": "CharacterController",
+"class": "WanderController",
+"language": "GDScript",
+"path": "res://script/WanderController.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
+"CharacterController": "",
 "Mockito": "",
 "Move": "",
 "PlayerController": "",
 "State": "",
 "StateMachine": "",
 "WAT": "",
-"WATTest": ""
+"WATTest": "",
+"WanderController": ""
 }
 
 [WAT]
