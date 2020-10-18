@@ -9,10 +9,35 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://script/Character.gd"
+}, {
 "base": "Reference",
 "class": "Mockito",
 "language": "GDScript",
 "path": "res://tests/helper/Mockito.gd"
+}, {
+"base": "State",
+"class": "Move",
+"language": "GDScript",
+"path": "res://script/Move.gd"
+}, {
+"base": "Node",
+"class": "PlayerController",
+"language": "GDScript",
+"path": "res://script/PlayerController.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://script/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://script/StateMachine.gd"
 }, {
 "base": "Reference",
 "class": "WAT",
@@ -25,7 +50,12 @@ _global_script_classes=[ {
 "path": "res://addons/WAT/core/test/test.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "Mockito": "",
+"Move": "",
+"PlayerController": "",
+"State": "",
+"StateMachine": "",
 "WAT": "",
 "WATTest": ""
 }
@@ -45,7 +75,15 @@ Display=8
 [application]
 
 config/name="rpg-arena"
+run/main_scene="res://scene/Game.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=512
+window/size/height=300
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
@@ -72,6 +110,34 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+
+[input]
+
+move_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
 }
 
 [rendering]
