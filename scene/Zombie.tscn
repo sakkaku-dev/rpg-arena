@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/zombie_.png" type="Texture" id=1]
+[ext_resource path="res://script/WanderController.gd" type="Script" id=2]
+[ext_resource path="res://scene/Character.tscn" type="PackedScene" id=3]
+[ext_resource path="res://script/Move.gd" type="Script" id=4]
+[ext_resource path="res://script/StateMachine.gd" type="Script" id=5]
+[ext_resource path="res://script/VisionArea.gd" type="Script" id=6]
+[ext_resource path="res://script/EnemyController.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.12692, 3.21428 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Run"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 64.7123
+
+[node name="Zombie" instance=ExtResource( 3 )]
+collision_layer = 4
+ctrl_path = NodePath("EnemyController")
+
+[node name="Body" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="Body" index="1"]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -4 )
+hframes = 8
+
+[node name="MovePlayer" type="AnimationPlayer" parent="." index="1"]
+anims/Idle = SubResource( 2 )
+anims/Run = SubResource( 3 )
+
+[node name="EnemyController" type="Node2D" parent="." index="2"]
+script = ExtResource( 7 )
+wander_ctrl_path = NodePath("WanderController")
+vision_path = NodePath("VisionArea")
+
+[node name="WanderController" type="Node2D" parent="EnemyController" index="0"]
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="EnemyController/WanderController" index="0"]
+wait_time = 2.0
+autostart = true
+
+[node name="VisionArea" type="Area2D" parent="EnemyController" index="1"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyController/VisionArea" index="0"]
+shape = SubResource( 4 )
+
+[node name="StateMachine" type="Node" parent="." index="3"]
+script = ExtResource( 5 )
+
+[node name="Move" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 4 )
+speed = 100
+acceleration = 300
+friction = 600
+character_path = NodePath("../..")
+[connection signal="timeout" from="EnemyController/WanderController/Timer" to="EnemyController/WanderController" method="start_new_wander"]
+[connection signal="body_entered" from="EnemyController/VisionArea" to="EnemyController/VisionArea" method="_on_VisionArea_body_entered"]
+[connection signal="body_exited" from="EnemyController/VisionArea" to="EnemyController/VisionArea" method="_on_VisionArea_body_exited"]
+[connection signal="idle" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Idle" ]]
+[connection signal="running" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Run" ]]

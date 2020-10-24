@@ -9,6 +9,10 @@ func _init():
 	add_to_group("state_machine")
 	
 func _ready():
+	if state == null and get_child_count() > 0:
+		var child = get_child(0)
+		if child is State:
+			state = child
 	state.enter()
 
 func _unhandled_input(event: InputEvent) -> void:
