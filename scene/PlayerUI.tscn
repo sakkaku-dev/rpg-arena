@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/ui_heart_empty.png" type="Texture" id=1]
+[ext_resource path="res://script/HealthUI.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui_heart_full.png" type="Texture" id=3]
+[ext_resource path="res://scene/PlayerUI.gd" type="Script" id=4]
+
+[node name="PlayerUI" type="CanvasLayer"]
+script = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 507.0
+margin_bottom = 295.0
+
+[node name="HealthUI" type="Control" parent="MarginContainer/MarginContainer"]
+margin_right = 502.0
+script = ExtResource( 2 )
+
+[node name="Empty" type="TextureRect" parent="MarginContainer/MarginContainer/HealthUI"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Full" type="TextureRect" parent="MarginContainer/MarginContainer/HealthUI"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 3 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

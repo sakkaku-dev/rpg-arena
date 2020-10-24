@@ -24,6 +24,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/EnemyController.gd"
 }, {
+"base": "Control",
+"class": "HealthUI",
+"language": "GDScript",
+"path": "res://script/HealthUI.gd"
+}, {
+"base": "Area2D",
+"class": "HitArea",
+"language": "GDScript",
+"path": "res://script/HitArea.gd"
+}, {
+"base": "Area2D",
+"class": "HurtArea",
+"language": "GDScript",
+"path": "res://script/HurtArea.gd"
+}, {
 "base": "Reference",
 "class": "Mockito",
 "language": "GDScript",
@@ -49,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/StateMachine.gd"
 }, {
+"base": "Node",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://script/Stats.gd"
+}, {
 "base": "Area2D",
 "class": "VisionArea",
 "language": "GDScript",
@@ -73,11 +93,15 @@ _global_script_class_icons={
 "Character": "",
 "CharacterController": "",
 "EnemyController": "",
+"HealthUI": "",
+"HitArea": "",
+"HurtArea": "",
 "Mockito": "",
 "Move": "",
 "PlayerController": "",
 "State": "",
 "StateMachine": "",
+"Stats": "",
 "VisionArea": "",
 "WAT": "",
 "WATTest": "",
@@ -169,6 +193,8 @@ attack={
 2d_physics/layer_1="objects"
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemy"
+2d_physics/layer_4="player_hurtbox"
+2d_physics/layer_5="enemy_hurtbox"
 
 [rendering]
 

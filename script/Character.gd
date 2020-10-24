@@ -28,3 +28,6 @@ func move(velocity: Vector2) -> void:
 func _physics_process(delta):
 	if ctrl.is_attacking():
 		emit_signal("attack")
+		
+func die():
+	queue_free()

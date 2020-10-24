@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/zombie_.png" type="Texture" id=1]
 [ext_resource path="res://script/WanderController.gd" type="Script" id=2]
@@ -46,6 +46,9 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=4]
 radius = 64.7123
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4.707, 6.57116 )
+
 [node name="Zombie" instance=ExtResource( 3 )]
 collision_layer = 4
 ctrl_path = NodePath("EnemyController")
@@ -91,8 +94,18 @@ speed = 100
 acceleration = 300
 friction = 600
 character_path = NodePath("../..")
+
+[node name="HurtArea" parent="." index="4"]
+position = Vector2( 0, -4 )
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="HurtArea" index="0"]
+shape = SubResource( 5 )
 [connection signal="timeout" from="EnemyController/WanderController/Timer" to="EnemyController/WanderController" method="start_new_wander"]
 [connection signal="body_entered" from="EnemyController/VisionArea" to="EnemyController/VisionArea" method="_on_VisionArea_body_entered"]
 [connection signal="body_exited" from="EnemyController/VisionArea" to="EnemyController/VisionArea" method="_on_VisionArea_body_exited"]
 [connection signal="idle" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Idle" ]]
 [connection signal="running" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Run" ]]
+
+[editable path="HurtArea"]

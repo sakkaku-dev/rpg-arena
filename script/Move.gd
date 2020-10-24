@@ -31,3 +31,7 @@ func physics_process(delta: float):
 		emit_signal("idle")
 
 	velocity = character.move_and_slide(velocity)
+
+func apply_knockback(knockback: Vector2) -> void:
+	print(knockback)
+	velocity += knockback

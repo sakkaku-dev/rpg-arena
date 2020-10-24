@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scene/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/knight.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scene/Sword.tscn" type="PackedScene" id=4]
 [ext_resource path="res://script/PlayerController.gd" type="Script" id=5]
 [ext_resource path="res://script/StateMachine.gd" type="Script" id=6]
+[ext_resource path="res://script/Stats.gd" type="Script" id=7]
+[ext_resource path="res://scene/PlayerUI.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.24055, 3.65973 )
@@ -57,6 +59,9 @@ tracks/0/keys = {
 "values": [ 0.0, 135.0, 0.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6.46327, 7.66877 )
+
 [node name="Knight" instance=ExtResource( 1 )]
 collision_layer = 2
 ctrl_path = NodePath("PlayerController")
@@ -91,6 +96,27 @@ script = ExtResource( 6 )
 [node name="Move" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 3 )
 character_path = NodePath("../..")
+
+[node name="HurtArea" parent="." index="6"]
+position = Vector2( 0, -5 )
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="HurtArea" index="0"]
+shape = SubResource( 5 )
+
+[node name="PlayerUI" parent="." index="7" instance=ExtResource( 8 )]
+
+[node name="Stats" type="Node" parent="." index="8"]
+script = ExtResource( 7 )
+max_health = 10
 [connection signal="attack" from="." to="AttackPlayer" method="play" binds= [ "Attack" ]]
 [connection signal="idle" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Idle" ]]
 [connection signal="running" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Run" ]]
+[connection signal="inflict_damage" from="HurtArea" to="Stats" method="reduce_health"]
+[connection signal="knockback_force" from="HurtArea" to="StateMachine/Move" method="apply_knockback"]
+[connection signal="health_changed" from="Stats" to="PlayerUI" method="set_health"]
+[connection signal="max_health_changed" from="Stats" to="PlayerUI" method="set_max_health"]
+[connection signal="no_health" from="Stats" to="." method="die"]
+
+[editable path="HurtArea"]
