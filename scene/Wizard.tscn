@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scene/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/wizzard_m_.png" type="Texture" id=2]
+[ext_resource path="res://scene/Staff.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resource/Mage.tres" type="Resource" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.90872, 3.21428 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6.90872, 7.44604 )
+
+[sub_resource type="Animation" id=3]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Wizard" instance=ExtResource( 1 )]
+stats_path = NodePath("../Wizard/CharacterStats")
+
+[node name="Body" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Staff" parent="Body/Hand" index="0" instance=ExtResource( 3 )]
+stats_path = NodePath("../../../CharacterStats")
+
+[node name="Sprite" parent="Body" index="1"]
+texture = ExtResource( 2 )
+offset = Vector2( 0, -11 )
+hframes = 9
+frame = 4
+
+[node name="HurtArea" parent="." index="1"]
+position = Vector2( 0, -5 )
+
+[node name="CollisionShape2D" parent="HurtArea" index="0"]
+shape = SubResource( 2 )
+
+[node name="CharacterStats" parent="." index="2"]
+stats = ExtResource( 4 )
+
+[node name="StateMachine" parent="." index="3"]
+initial_state_path = NodePath("../../Wizard/StateMachine/Move")
+
+[node name="Move" parent="StateMachine" index="0"]
+character_path = NodePath("../../../Wizard")
+
+[node name="MovePlayer" type="AnimationPlayer" parent="." index="4"]
+anims/Idle = SubResource( 3 )
+anims/Run = SubResource( 4 )
+[connection signal="attack" from="." to="Body/Hand/Staff" method="shoot"]
+[connection signal="idle" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Idle" ]]
+[connection signal="running" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Run" ]]
+
+[editable path="HurtArea"]

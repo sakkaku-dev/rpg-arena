@@ -26,3 +26,6 @@ func get_speed() -> int:
 
 func get_physical_damage(dmg: int) -> int:
 	return get_stats().strength * dmg
+
+func get_magical_damage(dmg: int) -> int:
+	return get_stats().intelligence * dmg

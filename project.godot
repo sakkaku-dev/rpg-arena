@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Arena",
+"language": "GDScript",
+"path": "res://script/Arena.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -64,6 +69,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/PlayerController.gd"
 }, {
+"base": "Node2D",
+"class": "PlayerSpawner",
+"language": "GDScript",
+"path": "res://script/PlayerSpawner.gd"
+}, {
+"base": "Node2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://script/Projectile.gd"
+}, {
+"base": "Node2D",
+"class": "ProjectileShooter",
+"language": "GDScript",
+"path": "res://script/ProjectileShooter.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -100,6 +120,7 @@ _global_script_classes=[ {
 "path": "res://script/WanderController.gd"
 } ]
 _global_script_class_icons={
+"Arena": "",
 "Character": "",
 "CharacterController": "",
 "CharacterStats": "",
@@ -111,6 +132,9 @@ _global_script_class_icons={
 "Mockito": "",
 "Move": "",
 "PlayerController": "",
+"PlayerSpawner": "",
+"Projectile": "",
+"ProjectileShooter": "",
 "State": "",
 "StateMachine": "",
 "Stats": "",
