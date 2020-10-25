@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/CharacterController.gd"
 }, {
+"base": "Node",
+"class": "CharacterStats",
+"language": "GDScript",
+"path": "res://script/CharacterStats.gd"
+}, {
 "base": "CharacterController",
 "class": "EnemyController",
 "language": "GDScript",
 "path": "res://script/EnemyController.gd"
+}, {
+"base": "Node",
+"class": "Health",
+"language": "GDScript",
+"path": "res://script/Health.gd"
 }, {
 "base": "Control",
 "class": "HealthUI",
@@ -64,10 +74,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/StateMachine.gd"
 }, {
-"base": "Node",
+"base": "Resource",
 "class": "Stats",
 "language": "GDScript",
-"path": "res://script/Stats.gd"
+"path": "res://resource/Stats.gd"
 }, {
 "base": "Area2D",
 "class": "VisionArea",
@@ -92,7 +102,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Character": "",
 "CharacterController": "",
+"CharacterStats": "",
 "EnemyController": "",
+"Health": "",
 "HealthUI": "",
 "HitArea": "",
 "HurtArea": "",

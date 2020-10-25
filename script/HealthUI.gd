@@ -2,9 +2,6 @@ extends Control
 
 class_name HealthUI
 
-export var stats_path: NodePath
-onready var stats: Stats = get_node(stats_path)
-
 onready var empty_heart := $Empty
 onready var full_heart := $Full
 
@@ -16,10 +13,8 @@ func _ready():
 
 
 func set_health(health: int):
-	print("Health: " + str(health))
 	full_heart.margin_right = heart_size * health
 
 
 func set_max_health(health: int):
-	print("Max Health: " + str(health))
 	empty_heart.margin_right = heart_size * health

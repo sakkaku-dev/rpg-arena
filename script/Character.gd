@@ -4,11 +4,17 @@ class_name Character
 
 signal attack
 
+export var stats_path: NodePath
+onready var stats: CharacterStats = get_node(stats_path)
+
 export var ctrl_path: NodePath
 onready var ctrl: CharacterController = get_node(ctrl_path)
 
 onready var body := $Body
 onready var hand := $Body/Hand
+
+func _ready():
+	stats.health.connect("no_health", self, "die")
 
 func move(velocity: Vector2) -> void:
 	var look_dir = ctrl.get_look_direction(self)

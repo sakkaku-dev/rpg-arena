@@ -1,6 +1,6 @@
 extends Node
 
-class_name Stats
+class_name Health
 
 signal no_health
 signal health_changed(health)
@@ -8,12 +8,6 @@ signal max_health_changed(health)
 
 export var max_health = 1 setget set_max_health
 onready var health = max_health setget set_health
-
-func _ready():
-	# Wait until HealthUI is done
-	yield(owner, "ready")
-	self.max_health = max_health
-	self.health = health
 
 func set_max_health(hp: int) -> void:
 	max_health = hp
@@ -26,6 +20,3 @@ func set_health(hp: int) -> void:
 	emit_signal("health_changed", health)
 	if health <= 0:
 		emit_signal("no_health")
-
-func reduce_health(value: int) -> void:
-	self.health -= value

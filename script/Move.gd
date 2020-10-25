@@ -5,10 +5,6 @@ class_name Move
 signal running
 signal idle
 
-export var speed = 200
-export var acceleration = 400
-export var friction = 800
-
 export var character_path: NodePath
 onready var character: Character = get_node(character_path)
 
@@ -19,6 +15,10 @@ func enter(msg = {}):
 	emit_signal("idle")
 
 func physics_process(delta: float):
+	var speed = character.stats.get_speed()
+	var acceleration = speed * 3
+	var friction = speed * 4
+	
 	var dir = character.ctrl.get_move_direction()
 	var accel = acceleration if dir.length() > 0.01 else friction
 	velocity = velocity.move_toward(dir * speed, accel  * delta)
@@ -33,5 +33,4 @@ func physics_process(delta: float):
 	velocity = character.move_and_slide(velocity)
 
 func apply_knockback(knockback: Vector2) -> void:
-	print(knockback)
 	velocity += knockback
