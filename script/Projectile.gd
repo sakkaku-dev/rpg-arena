@@ -12,5 +12,5 @@ func _physics_process(delta: float) -> void:
 
 
 func on_hit(body):
-	hit_area.create_hit_effect(body)
+	hit_area.create_hit_effect(self)
 	queue_free()
