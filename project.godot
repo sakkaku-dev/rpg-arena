@@ -9,10 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spell",
+"class": "AreaSpell",
+"language": "GDScript",
+"path": "res://script/AreaSpell.gd"
+}, {
+"base": "Area2D",
+"class": "AreaSpellSelect",
+"language": "GDScript",
+"path": "res://script/AreaSpellSelect.gd"
+}, {
 "base": "Node2D",
 "class": "Arena",
 "language": "GDScript",
 "path": "res://script/Arena.gd"
+}, {
+"base": "State",
+"class": "Attack",
+"language": "GDScript",
+"path": "res://script/Attack.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Character",
@@ -64,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/Move.gd"
 }, {
+"base": "Character",
+"class": "Player",
+"language": "GDScript",
+"path": "res://script/Player.gd"
+}, {
 "base": "CharacterController",
 "class": "PlayerController",
 "language": "GDScript",
@@ -83,6 +103,16 @@ _global_script_classes=[ {
 "class": "ProjectileShooter",
 "language": "GDScript",
 "path": "res://script/ProjectileShooter.gd"
+}, {
+"base": "Spell",
+"class": "ShotSpell",
+"language": "GDScript",
+"path": "res://script/ShotSpell.gd"
+}, {
+"base": "Node2D",
+"class": "Spell",
+"language": "GDScript",
+"path": "res://script/Spell.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -120,7 +150,10 @@ _global_script_classes=[ {
 "path": "res://script/WanderController.gd"
 } ]
 _global_script_class_icons={
+"AreaSpell": "",
+"AreaSpellSelect": "",
 "Arena": "",
+"Attack": "",
 "Character": "",
 "CharacterController": "",
 "CharacterStats": "",
@@ -131,10 +164,13 @@ _global_script_class_icons={
 "HurtArea": "",
 "Mockito": "",
 "Move": "",
+"Player": "",
 "PlayerController": "",
 "PlayerSpawner": "",
 "Projectile": "",
 "ProjectileShooter": "",
+"ShotSpell": "",
+"Spell": "",
 "State": "",
 "StateMachine": "",
 "Stats": "",
@@ -223,6 +259,16 @@ attack={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+spell_1={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
+spell_2={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":71,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -234,5 +280,5 @@ attack={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.117647, 0.117647, 0.117647, 1 )
+environment/default_clear_color=Color( 0.192157, 0.192157, 0.192157, 1 )
 environment/default_environment="res://default_env.tres"

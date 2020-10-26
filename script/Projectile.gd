@@ -10,7 +10,7 @@ func _physics_process(delta: float) -> void:
 	var dir = Vector2.RIGHT.rotated(global_transform.get_rotation())
 	translate(dir * speed * delta)
 
-
 func on_hit(body):
-	hit_area.create_hit_effect(self)
+	if not body is HurtArea:
+		hit_area.create_hit_effect(self)
 	queue_free()

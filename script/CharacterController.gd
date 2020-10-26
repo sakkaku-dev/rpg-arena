@@ -10,3 +10,9 @@ func get_move_direction() -> Vector2:
 	
 func get_look_direction(character: Node2D) -> Vector2:
 	return get_move_direction()
+
+func is_spell_1() -> bool:
+	return false
+
+func is_spell_2() -> bool:
+	return false

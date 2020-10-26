@@ -9,8 +9,9 @@ enum Type {
 	MAGICAL
 }
 
-export var damage = 1
+export var damage = 1.0
 export var knockback_force = 1.0
+export var effect_size = 1.0
 
 export var stats_path: NodePath
 onready var stats: CharacterStats = get_node(stats_path)
@@ -35,6 +36,7 @@ func create_hit_effect(node: Node) -> void:
 	var pos = node.global_position
 	var effect = hit_effect.instance() as Node2D
 	get_tree().current_scene.add_child(effect)
+	effect.scale *= effect_size
 	effect.global_position = pos
 
 
@@ -44,3 +46,7 @@ func _get_hit_node() -> Node2D:
 		return overlaps[0] as Node2D
 	return null
 
+
+
+func _on_HitArea_body_entered(body):
+	emit_signal("on_hit", body)

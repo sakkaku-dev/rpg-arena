@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scene/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/knight.png" type="Texture" id=2]
+[ext_resource path="res://script/Player.gd" type="Script" id=3]
 [ext_resource path="res://scene/Sword.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -71,6 +72,7 @@ extents = Vector2( 6.46327, 7.66877 )
 
 [node name="Knight" instance=ExtResource( 1 )]
 collision_layer = 2
+script = ExtResource( 3 )
 
 [node name="Body" parent="." index="0"]
 shape = SubResource( 1 )
@@ -101,9 +103,9 @@ collision_mask = 0
 
 [node name="CollisionShape2D" parent="HurtArea" index="0"]
 shape = SubResource( 5 )
-[connection signal="attack" from="." to="AttackPlayer" method="play" binds= [ "Attack" ]]
 [connection signal="idle" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Idle" ]]
 [connection signal="running" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Run" ]]
+[connection signal="attack" from="AttackState/Attack" to="AttackPlayer" method="play" binds= [ "Attack" ]]
 
 [editable path="Body/Hand/Sword"]
 

@@ -1,35 +1,32 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/ui_heart_empty.png" type="Texture" id=1]
 [ext_resource path="res://script/HealthUI.gd" type="Script" id=2]
 [ext_resource path="res://assets/ui_heart_full.png" type="Texture" id=3]
 [ext_resource path="res://script/PlayerUI.gd" type="Script" id=4]
+[ext_resource path="res://scene/SkillUI.tscn" type="PackedScene" id=5]
 
 [node name="PlayerUI" type="CanvasLayer"]
 script = ExtResource( 4 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="TopContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
+custom_constants/margin_right = 3
+custom_constants/margin_top = 3
+custom_constants/margin_left = 3
+custom_constants/margin_bottom = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 507.0
-margin_bottom = 295.0
-
-[node name="HealthUI" type="Control" parent="MarginContainer/MarginContainer"]
-margin_right = 502.0
+[node name="HealthUI" type="Control" parent="TopContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 509.0
+margin_bottom = 3.0
 script = ExtResource( 2 )
 
-[node name="Empty" type="TextureRect" parent="MarginContainer/MarginContainer/HealthUI"]
+[node name="Empty" type="TextureRect" parent="TopContainer/HealthUI"]
 margin_right = 16.0
 margin_bottom = 16.0
 texture = ExtResource( 1 )
@@ -38,7 +35,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Full" type="TextureRect" parent="MarginContainer/MarginContainer/HealthUI"]
+[node name="Full" type="TextureRect" parent="TopContainer/HealthUI"]
 margin_right = 16.0
 margin_bottom = 16.0
 texture = ExtResource( 3 )
@@ -46,3 +43,57 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BottomLeft" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -38.0
+margin_right = 512.0
+custom_constants/margin_left = 3
+custom_constants/margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equipment" type="HBoxContainer" parent="BottomLeft"]
+margin_left = 3.0
+margin_right = 512.0
+margin_bottom = 35.0
+
+[node name="Attack" parent="BottomLeft/Equipment" instance=ExtResource( 5 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 32.0
+margin_bottom = 35.0
+
+[node name="BottomRight" type="MarginContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -71.0
+margin_top = -37.0
+rect_rotation = 0.0407103
+custom_constants/margin_right = 3
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomRight"]
+margin_right = 68.0
+margin_bottom = 34.0
+
+[node name="Skill1" parent="BottomRight/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 32.0
+margin_bottom = 34.0
+
+[node name="Skill2" parent="BottomRight/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 36.0
+margin_top = 0.0
+margin_right = 68.0
+margin_bottom = 34.0

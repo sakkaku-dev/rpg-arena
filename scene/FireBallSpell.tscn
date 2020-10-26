@@ -1,7 +1,9 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=52 format=2]
 
-[ext_resource path="res://assets/Explosion_2_64x64.png" type="Texture" id=1]
-[ext_resource path="res://script/HitEffect.gd" type="Script" id=2]
+[ext_resource path="res://assets/FireBall_2_64x64.png" type="Texture" id=1]
+[ext_resource path="res://scene/Projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/FireExplosion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://script/ShotSpell.gd" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -179,17 +181,36 @@ region = Rect2( 2688, 0, 64, 64 )
 atlas = ExtResource( 1 )
 region = Rect2( 2752, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=45]
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 1 )
+region = Rect2( 2816, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=46]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ],
 "loop": true,
 "name": "default",
-"speed": 88.0
+"speed": 45.0
 } ]
 
-[node name="FireExplosion" type="Node2D"]
-script = ExtResource( 2 )
+[sub_resource type="CircleShape2D" id=47]
+radius = 12.0
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 45 )
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="finish_effect"]
+[node name="FireBallSpell" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="AnimatedSprite" parent="." index="0"]
+frames = SubResource( 46 )
+frame = 20
+offset = Vector2( -20, 0 )
+
+[node name="HitArea" parent="." index="1"]
+collision_layer = 0
+collision_mask = 17
+knockback_force = 2.0
+hit_effect = ExtResource( 3 )
+attack_type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="0"]
+shape = SubResource( 47 )
+[connection signal="on_hit" from="HitArea" to="." method="on_hit"]

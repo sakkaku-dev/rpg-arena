@@ -12,7 +12,7 @@ func spawn_player(idx: int) -> void:
 		return
 	
 	var character_scene = characters[idx] as PackedScene
-	var new_character = character_scene.instance()
+	var new_character = character_scene.instance() as Player
 	
 	var ctrl = PlayerController.new()
 	new_character.add_child(ctrl)
@@ -25,3 +25,12 @@ func spawn_player(idx: int) -> void:
 
 	add_child(new_character)
 	player_ui.connect_stats(new_character.stats)
+	
+	if new_character.skill_1_ui != null:
+		player_ui.set_first_skill(new_character.skill_1_ui)
+	
+	if new_character.skill_2_ui != null:
+		player_ui.set_second_skill(new_character.skill_2_ui)
+		
+	if new_character.attack_ui != null:
+		player_ui.set_attack(new_character.attack_ui)

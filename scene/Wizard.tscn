@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scene/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/wizzard_m_.png" type="Texture" id=2]
 [ext_resource path="res://scene/Staff.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resource/Mage.tres" type="Resource" id=4]
+[ext_resource path="res://script/Player.gd" type="Script" id=5]
+[ext_resource path="res://assets/fireball-ui.png" type="Texture" id=6]
+[ext_resource path="res://scene/FireField.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/firecircle-ui.png" type="Texture" id=8]
+[ext_resource path="res://scene/FireBallSpell.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.90872, 3.21428 )
@@ -44,7 +49,10 @@ tracks/0/keys = {
 }
 
 [node name="Wizard" instance=ExtResource( 1 )]
-stats_path = NodePath("../Wizard/CharacterStats")
+collision_layer = 2
+script = ExtResource( 5 )
+skill_1_ui = ExtResource( 6 )
+skill_2_ui = ExtResource( 8 )
 
 [node name="Body" parent="." index="0"]
 shape = SubResource( 1 )
@@ -60,6 +68,8 @@ frame = 4
 
 [node name="HurtArea" parent="." index="1"]
 position = Vector2( 0, -5 )
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" parent="HurtArea" index="0"]
 shape = SubResource( 2 )
@@ -76,8 +86,11 @@ character_path = NodePath("../../../Wizard")
 [node name="MovePlayer" type="AnimationPlayer" parent="." index="4"]
 anims/Idle = SubResource( 3 )
 anims/Run = SubResource( 4 )
-[connection signal="attack" from="." to="Body/Hand/Staff" method="shoot"]
+
+[node name="CastSpell" parent="AttackState" index="1"]
+spells = [ ExtResource( 10 ), ExtResource( 7 ) ]
 [connection signal="idle" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Idle" ]]
 [connection signal="running" from="StateMachine/Move" to="MovePlayer" method="play" binds= [ "Run" ]]
+[connection signal="attack" from="AttackState/Attack" to="Body/Hand/Staff" method="shoot"]
 
 [editable path="HurtArea"]

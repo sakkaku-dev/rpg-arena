@@ -2,8 +2,6 @@ extends KinematicBody2D
 
 class_name Character
 
-signal attack
-
 export var stats_path: NodePath
 onready var stats: CharacterStats = get_node(stats_path)
 
@@ -31,9 +29,5 @@ func move(velocity: Vector2) -> void:
 	var angle = curr_vec.angle_to(look_dir)
 	hand.rotation += angle
 
-func _physics_process(delta):
-	if ctrl.is_attacking():
-		emit_signal("attack")
-		
 func die():
 	queue_free()
