@@ -2,8 +2,14 @@ extends CharacterController
 
 class_name PlayerController
 
-func is_attacking() -> bool:
-	return Input.is_action_just_pressed("attack")
+func is_attacking(event: InputEvent) -> bool:
+	return event.is_action_pressed("attack")
+
+func is_spell_1(event: InputEvent) -> bool:
+	return event.is_action_pressed("spell_1")
+	
+func is_spell_2(event: InputEvent) -> bool:
+	return event.is_action_pressed("spell_2")
 
 func get_move_direction() -> Vector2:
 	return Vector2(_right_action() - _left_action(), _down_action() - _up_action())

@@ -5,20 +5,20 @@ export var spells: Array
 export var player_path: NodePath
 onready var player: Character = get_node(player_path)
 
-#export var player_stats_path: NodePath
-#onready var player_stats: PlayerStat = get_node(player_stats_path)
-
 export var attack_path: NodePath
 onready var attack: State = get_node(attack_path)
 
 var spell: Spell
+var spell_index: int
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack"):
+	if player.ctrl.is_attacking(event):
 		spell.cast(player)
 
 func enter(msg: Dictionary = {}) -> void:
 	spell = get_spell(msg.spell)
+	spell_index = msg.spell
+	
 	if spell == null or not _can_cast_spell():
 		_state_machine.transition_to(attack)
 		return
@@ -35,9 +35,8 @@ func get_spell(spell_index: int) -> Spell:
 	return spells[spell_index].instance()
 
 func _can_cast_spell() -> bool:
-	return true
-#	return spell != null and player_stats.mana.value >= spell.required_mana
+	return player.can_cast_skill(spell_index)
 
 func _after_spell() -> void:
-#	player_stats.consume_mana(spell.required_mana)
 	_state_machine.transition_to(attack)
+	player.casted_skill(spell_index, spell.cooldown)

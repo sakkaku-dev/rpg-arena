@@ -8,3 +8,5 @@ export var attack_ui: Texture
 
 func add_spell(spell: Node2D):
 	get_tree().current_scene.add_child(spell)
+
+

@@ -2,8 +2,8 @@ extends CanvasLayer
 
 onready var health := $TopContainer/HealthUI
 onready var attack := $BottomLeft/Equipment/Attack
-onready var skill_1 := $BottomRight/HBoxContainer/Skill1
-onready var skill_2 := $BottomRight/HBoxContainer/Skill2
+onready var skill_1: SkillUI = $BottomRight/HBoxContainer/Skill1
+onready var skill_2: SkillUI = $BottomRight/HBoxContainer/Skill2
 
 func connect_stats(stats: CharacterStats):
 	health.set_health(stats.health.health)

@@ -11,7 +11,7 @@ enum Type {
 }
 
 export(Type) var spell_type = Type.SHOT
-export var required_mana = 0
+export var cooldown = 0
 
 func prepare(player) -> bool:
 	return true

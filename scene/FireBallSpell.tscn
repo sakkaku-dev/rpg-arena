@@ -198,10 +198,11 @@ radius = 12.0
 
 [node name="FireBallSpell" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
+cooldown = 5
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 46 )
-frame = 20
+frame = 17
 offset = Vector2( -20, 0 )
 
 [node name="HitArea" parent="." index="1"]

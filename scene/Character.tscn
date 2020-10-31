@@ -37,6 +37,7 @@ initial_state_path = NodePath("Attack")
 [node name="Attack" type="Node" parent="AttackState"]
 script = ExtResource( 6 )
 cast_spell_path = NodePath("../CastSpell")
+player_path = NodePath("../..")
 
 [node name="CastSpell" type="Node" parent="AttackState"]
 script = ExtResource( 7 )

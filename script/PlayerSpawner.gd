@@ -28,9 +28,13 @@ func spawn_player(idx: int) -> void:
 	
 	if new_character.skill_1_ui != null:
 		player_ui.set_first_skill(new_character.skill_1_ui)
+		new_character.connect("skill_1_casted", player_ui.skill_1, "start_cooldown")
+		player_ui.skill_1.connect("cooldown_ended", new_character, "reset_skill", [0])
 	
 	if new_character.skill_2_ui != null:
 		player_ui.set_second_skill(new_character.skill_2_ui)
+		new_character.connect("skill_2_casted", player_ui.skill_2, "start_cooldown")
+		player_ui.skill_2.connect("cooldown_ended", new_character, "reset_skill", [1])
 		
 	if new_character.attack_ui != null:
 		player_ui.set_attack(new_character.attack_ui)

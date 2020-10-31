@@ -130,7 +130,9 @@ radius = 40.0
 [node name="FireField" type="Node2D"]
 script = ExtResource( 3 )
 spell_type = 1
+cooldown = 5
 area_size = 40
+duration = 3
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 29 )
@@ -140,7 +142,6 @@ playing = true
 [node name="HitArea" parent="." instance=ExtResource( 2 )]
 collision_layer = 0
 collision_mask = 16
-damage = 1.0
 knockback_force = 0.0
 attack_type = 1
 
