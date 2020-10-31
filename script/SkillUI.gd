@@ -22,7 +22,7 @@ func set_texture(texture: Texture) -> void:
 	texture_rect.texture = img
 	show()
 
-func start_cooldown(cd: int) -> void:
+func start_cooldown(cd: float) -> void:
 	cooldown = cd
 	time = 0
 	overlay.set("custom_constants/margin_top", overlay_size)

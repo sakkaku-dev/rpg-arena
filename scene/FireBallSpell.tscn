@@ -202,7 +202,7 @@ cooldown = 5
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 46 )
-frame = 17
+frame = 37
 offset = Vector2( -20, 0 )
 
 [node name="HitArea" parent="." index="1"]

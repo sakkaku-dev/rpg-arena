@@ -10,5 +10,4 @@ script = ExtResource( 2 )
 playing = true
 
 [node name="HitArea" parent="." instance=ExtResource( 1 )]
-[connection signal="body_entered" from="HitArea" to="." method="on_hit"]
 [connection signal="on_hit" from="HitArea" to="." method="on_hit"]
