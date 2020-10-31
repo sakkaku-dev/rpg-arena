@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scene/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/wizzard_m_.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/fireball-ui.png" type="Texture" id=6]
 [ext_resource path="res://scene/FireField.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/firecircle-ui.png" type="Texture" id=8]
+[ext_resource path="res://assets/staff-ui.png" type="Texture" id=9]
 [ext_resource path="res://scene/FireBallSpell.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -53,6 +54,8 @@ collision_layer = 2
 script = ExtResource( 5 )
 skill_1_ui = ExtResource( 6 )
 skill_2_ui = ExtResource( 8 )
+attack_ui = ExtResource( 9 )
+projectile_path = NodePath("Body/Hand/Staff")
 
 [node name="Body" parent="." index="0"]
 shape = SubResource( 1 )

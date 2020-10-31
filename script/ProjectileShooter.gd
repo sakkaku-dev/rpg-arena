@@ -2,6 +2,8 @@ extends Node2D
 
 class_name ProjectileShooter
 
+signal shot_projectile(cooldown)
+
 export var fire_rate = 1.0
 
 export var spawn_pos_path: NodePath
@@ -24,11 +26,7 @@ func shoot():
 	proj.global_position = spawn_pos.global_position
 	proj.hit_area.stats = stats
 	shot = true
+	emit_signal("shot_projectile", fire_rate)
 
-func _physics_process(delta):
-	if shot:
-		time += delta
-		
-	if time >= fire_rate:
-		time = 0
-		shot = false
+func reset_shot() -> void:
+	shot = false

@@ -38,3 +38,6 @@ func spawn_player(idx: int) -> void:
 		
 	if new_character.attack_ui != null:
 		player_ui.set_attack(new_character.attack_ui)
+		if new_character.projectile:
+			new_character.projectile.connect("shot_projectile", player_ui.attack, "start_cooldown")
+			player_ui.attack.connect("cooldown_ended", new_character.projectile, "reset_shot")
