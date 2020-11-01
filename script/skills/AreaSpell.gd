@@ -5,7 +5,7 @@ class_name AreaSpell
 export var area_size = 1
 export var duration = 1
 
-var spell_area = preload("res://scene/AreaSpellSelect.tscn")
+var spell_area = preload("res://scene/skills/AreaSpellSelect.tscn")
 var area: AreaSpellSelect
 
 onready var hit_area = $HitArea

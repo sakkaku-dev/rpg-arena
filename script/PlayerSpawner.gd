@@ -5,7 +5,7 @@ class_name PlayerSpawner
 export var characters: Array
 
 const PlayerCamera = preload("res://scene/PlayerCamera.tscn")
-const PlayerUI = preload("res://scene/PlayerUI.tscn")
+const PlayerUI = preload("res://scene/ui/PlayerUI.tscn")
 
 func spawn_player(idx: int) -> void:
 	if idx < 0 or idx >= characters.size():

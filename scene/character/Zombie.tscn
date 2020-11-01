@@ -8,9 +8,6 @@
 [ext_resource path="res://script/VisionArea.gd" type="Script" id=6]
 [ext_resource path="res://script/character/EnemyController.gd" type="Script" id=7]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.12692, 3.21428 )
 
