@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://script/CharacterStats.gd" type="Script" id=1]
+[ext_resource path="res://script/character/CharacterStats.gd" type="Script" id=1]
 [ext_resource path="res://script/Health.gd" type="Script" id=2]
 [ext_resource path="res://resource/Knight.tres" type="Resource" id=3]
+
 
 [node name="CharacterStats" type="Node"]
 script = ExtResource( 1 )

@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://script/PlayerSpawner.gd" type="Script" id=1]
-[ext_resource path="res://scene/Knight.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scene/Wizard.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/character/Knight.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/character/Wizard.tscn" type="PackedScene" id=3]
+
 
 [node name="PlayerSpawner" type="Node2D"]
 script = ExtResource( 1 )
