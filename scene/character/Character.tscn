@@ -8,8 +8,6 @@
 [ext_resource path="res://scene/HurtArea.tscn" type="PackedScene" id=6]
 [ext_resource path="res://script/state/StateMachine.gd" type="Script" id=7]
 
-
-
 [node name="Character" type="KinematicBody2D"]
 script = ExtResource( 1 )
 stats_path = NodePath("CharacterStats")
@@ -47,4 +45,6 @@ spells = [ null, null ]
 player_path = NodePath("../..")
 attack_path = NodePath("../Attack")
 [connection signal="inflict_damage" from="HurtArea" to="CharacterStats" method="damaged"]
+[connection signal="invincibility_start" from="HurtArea" to="." method="set_invincibility" binds= [ true ]]
+[connection signal="invincibility_timeout" from="HurtArea" to="." method="set_invincibility" binds= [ false ]]
 [connection signal="knockback_force" from="HurtArea" to="StateMachine/Move" method="apply_knockback"]

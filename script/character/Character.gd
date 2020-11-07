@@ -13,6 +13,7 @@ onready var ctrl: CharacterController = get_node(ctrl_path)
 
 onready var body := $Body
 onready var hand := $Body/Hand
+onready var sprite := $Body/Sprite
 
 var skill_casted  = []
 
@@ -36,6 +37,10 @@ func move(velocity: Vector2) -> void:
 
 func die():
 	queue_free()
+
+
+func set_invincibility(invincible: bool):
+	sprite.modulate.a8 = 150 if invincible else 255
 
 
 func can_cast_skill(idx: int) -> bool:

@@ -11,9 +11,6 @@
 [ext_resource path="res://scene/skills/FireField.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scene/skills/FireBallSpell.tscn" type="PackedScene" id=10]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.90872, 3.21428 )
 
