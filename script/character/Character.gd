@@ -2,11 +2,12 @@ extends KinematicBody2D
 
 signal skill_1_casted(cooldown)
 signal skill_2_casted(cooldown)
+signal died
 
 class_name Character
 
 export var stats_path: NodePath
-onready var stats: CharacterStats = get_node(stats_path)
+onready var stats := get_node(stats_path)
 
 export var ctrl_path: NodePath
 onready var ctrl: CharacterController = get_node(ctrl_path)
@@ -36,6 +37,7 @@ func move(velocity: Vector2) -> void:
 	hand.rotation += angle
 
 func die():
+	emit_signal("died")
 	queue_free()
 
 

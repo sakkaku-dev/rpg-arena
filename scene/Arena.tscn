@@ -669,5 +669,25 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 52 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOver" type="CenterContainer" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOver"]
+margin_left = 186.0
+margin_top = 134.0
+margin_right = 325.0
+margin_bottom = 165.0
+text = "Game Over
+Press space to restart"
+align = 1
+[connection signal="died" from="Characters/PlayerSpawner" to="." method="_on_PlayerSpawner_died"]
 [connection signal="enemies_killed" from="Characters/EnemySpawner" to="Walls" method="open_door"]
 [connection signal="body_entered" from="Area2D" to="." method="scene_reload"]

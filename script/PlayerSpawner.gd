@@ -1,5 +1,7 @@
 extends Node2D
 
+signal died
+
 class_name PlayerSpawner
 
 export var characters: Array
@@ -7,12 +9,16 @@ export var characters: Array
 const PlayerCamera = preload("res://scene/PlayerCamera.tscn")
 const PlayerUI = preload("res://scene/ui/PlayerUI.tscn")
 
+func player_died():
+	emit_signal("died")
+
 func spawn_player(idx: int) -> void:
 	if idx < 0 or idx >= characters.size():
 		return
 	
 	var character_scene = characters[idx] as PackedScene
-	var new_character = character_scene.instance() as Player
+	var new_character = character_scene.instance()
+	new_character.connect("died", self, "player_died")
 	
 	var ctrl = PlayerController.new()
 	new_character.add_child(ctrl)
