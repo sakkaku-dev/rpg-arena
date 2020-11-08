@@ -2,14 +2,16 @@ extends Node2D
 
 class_name Arena
 
-export var player_idx = 0
-
 onready var player_spawner = $Characters/PlayerSpawner
 onready var enemy_spawner = $Characters/EnemySpawner
 
 func _ready():
 	randomize()
-	player_spawner.spawn_player(player_idx)
+	spawn(Game.selected_character)
+
+
+func spawn(idx: int) -> void:
+	player_spawner.spawn_player(idx)
 	enemy_spawner.spawn_enemies(Rect2(enemy_spawner.global_position, Vector2(400, 250)))
 
 

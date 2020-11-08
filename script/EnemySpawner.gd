@@ -20,7 +20,7 @@ func spawn_enemies(spawn_area: Rect2) -> void:
 		var rand_x = randi() % size_x
 		var rand_y = randi() % size_y
 		
-		var enemy = enemy_scene.instance() as Character
+		var enemy = enemy_scene.instance()
 		add_child(enemy)
 		enemy.global_position = spawn_area.position + Vector2(rand_x, rand_y)
 	

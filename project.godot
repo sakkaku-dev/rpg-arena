@@ -216,6 +216,10 @@ config/name="rpg-arena"
 run/main_scene="res://scene/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Game="*res://script/Game.gd"
+
 [display]
 
 window/size/width=512
