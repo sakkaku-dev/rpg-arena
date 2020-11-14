@@ -44,7 +44,7 @@ jobs:
           ln -s /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
           mkdir -v -p build/win
           whoami && pwd
-          godot -v --export "Windows Desktop" ./build/win/main.exe
+          ./Godot_v${GODOT_VERSION}-stable_linux_headless.64 -v --export "Windows Desktop" ./build/win/main.exe
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
