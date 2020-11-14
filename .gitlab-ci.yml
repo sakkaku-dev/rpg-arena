@@ -1,0 +1,10 @@
+image: barichello/godot-ci:3.2.3
+
+build:
+    script:
+        - mkdir -v -p build/win
+        - whoami && pwd
+        - godot -v --export "Windows Desktop" ./build/win/main.exe
+    artifacts:
+        paths:
+            - build/win/*
