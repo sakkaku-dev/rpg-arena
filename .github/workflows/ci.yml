@@ -23,14 +23,22 @@ jobs:
   export-windows:
     name: Windows Export
     runs-on: ubuntu-latest
- #   needs: tests
-    container:
-      image: barichello/godot-ci:3.2.3
+#    needs: tests
+#    container:
+#      image: barichello/godot-ci:3.2.3
     steps:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Export
+        env:
+          GODOT_VERSION: 3.2.3
         run: |
+          apt-get update && apt-get install -y wget unzip ca-certificates
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          unzip Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
+          mv templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
           mkdir -v -p ~/.local/share/godot/templates
           ln -s /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
           mkdir -v -p build/win
