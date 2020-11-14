@@ -3,6 +3,7 @@ build:
     variables:
         GODOT_VERSION: "3.2.3"
     before_script:
+        - apt-get update && apt-get install -y wget unzip ca-certificates
         - wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
         - wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
         - mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
