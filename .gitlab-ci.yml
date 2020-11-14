@@ -3,12 +3,11 @@ build:
     variables:
         GODOT_VERSION: "3.2.3"
     before_script:
-        - wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip \
-        && wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz \
-        && mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable \
-        && unzip Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip \
-        && unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz \
-        && mv templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable \
+        - wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
+        - wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+        - mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+        - unzip Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
+        - mv templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
 
     script:
         - mkdir -v -p build/win
